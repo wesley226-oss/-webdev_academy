@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WebDev Academy — Learn to Build Websites</title>
+<style>
+:root{--bg:#0b1020;--panel:#131b31;--panel2:#192440;--text:#eef3ff;--muted:#aab7d3;--blue:#62a5ff;--purple:#a78bfa;--line:#293653;--green:#55d6a0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{padding:22px max(20px,calc((100% - 1180px)/2));background:linear-gradient(120deg,#14264b,#30205b);border-bottom:1px solid var(--line)}
+.brand{font-weight:800;font-size:1.25rem;letter-spacing:.3px}.brand span{color:#8fc1ff}
+header p{margin:8px 0 0;color:#d5def4;max-width:760px}
+.wrap{max-width:1180px;margin:auto;padding:24px 18px 60px}
+.hero{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;margin-bottom:22px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px}
+.hero h1{font-size:clamp(1.8rem,4vw,3rem);line-height:1.12;margin:0 0 12px}.hero p,.muted{color:var(--muted)}
+.pill{display:inline-block;padding:5px 10px;border-radius:99px;background:#20365e;color:#bcd9ff;font-size:.8rem;font-weight:700}
+.progress{height:10px;background:#26334f;border-radius:99px;overflow:hidden;margin:10px 0}.progress div{height:100%;background:linear-gradient(90deg,var(--blue),var(--purple));width:0%;transition:width .25s}
+.layout{display:grid;grid-template-columns:265px 1fr;gap:18px;align-items:start}
+nav{position:sticky;top:12px}.navgroup{margin:14px 0 6px;color:#8ea3ca;font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:1px}
+.navbtn{display:block;width:100%;text-align:left;border:0;background:transparent;color:var(--muted);padding:10px 12px;border-radius:10px;cursor:pointer;font:inherit}
+.navbtn:hover,.navbtn.active{background:#20345a;color:white}.navbtn.active{box-shadow:inset 3px 0 var(--blue)}
+main h2{margin:0 0 8px;font-size:1.7rem}main h3{margin:22px 0 8px}main p{color:#d2dcef}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.course{background:var(--panel2);border:1px solid var(--line);border-radius:13px;padding:15px;cursor:pointer}
+.course:hover{border-color:var(--blue);transform:translateY(-1px)}.course strong{display:block;font-size:1.05rem}.course small{color:var(--muted)}
+.tag{font-size:.75rem;color:#a9caff}
+pre,textarea,code{font-family:Consolas,Monaco,monospace}
+pre{white-space:pre-wrap;overflow:auto;background:#080d19;border:1px solid #27334e;padding:14px;border-radius:10px;color:#d9e6ff}
+.editor{width:100%;min-height:190px;resize:vertical;background:#080d19;color:#e6efff;border:1px solid #344567;border-radius:10px;padding:13px;font:14px/1.55 Consolas,monospace}
+button.primary,button.secondary{border:0;border-radius:10px;padding:10px 15px;font-weight:750;cursor:pointer}
+.primary{background:var(--blue);color:#071326}.secondary{background:#293956;color:white}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin:10px 0}
+iframe{width:100%;height:240px;background:white;border:1px solid var(--line);border-radius:10px}
+.quizopt{display:block;margin:8px 0;padding:10px;border:1px solid var(--line);border-radius:9px;cursor:pointer}.quizopt:hover{background:#1b2945}
+.notice{padding:12px;border-left:3px solid var(--green);background:#102a2a;border-radius:8px;color:#d8fff0}
+footer{text-align:center;color:var(--muted);padding:30px 10px}
+.hidden{display:none}
+@media(max-width:800px){.hero{grid-template-columns:1fr}.layout{grid-template-columns:1fr}nav{position:static}.navlist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand">✦ WebDev <span>Academy</span></div>
+ <p>A beginner-friendly learning space for the languages and tools used to plan, build, style, program and publish websites.</p>
+</header>
+<div class="wrap">
+ <section class="hero">
+  <div class="card">
+   <span class="pill">YOUR WEB DEVELOPMENT CLASSROOM</span>
+   <h1>Learn the skills.<br><span style="color:#8fc1ff">Build the website.</span></h1>
+   <p>Start with the foundations, practise with examples, and gradually learn how front-end and back-end parts work together.</p>
+   <div class="actions"><button class="primary" onclick="showLesson('html')">Start learning</button><button class="secondary" onclick="showPage('roadmap')">View course roadmap</button></div>
+  </div>
+  <div class="card">
+   <strong>Your learning progress</strong>
+   <div class="progress"><div id="progressBar"></div></div>
+   <p id="progressText" class="muted">0 lessons completed</p>
+   <p class="muted">Tip: study one lesson, type the example yourself, then try changing it.</p>
+  </div>
+ </section>
+
+ <div class="layout">
+  <nav class="card">
+   <div class="navgroup">Learning menu</div>
+   <div class="navlist">
+    <button class="navbtn active" data-page="home" onclick="showPage('home')">⌂ Course home</button>
+    <button class="navbtn" data-page="roadmap" onclick="showPage('roadmap')">☷ Full roadmap</button>
+    <button class="navbtn" data-page="practice" onclick="showPage('practice')">⌨ Code playground</button>
+    <button class="navbtn" data-page="glossary" onclick="showPage('glossary')">▤ Web glossary</button>
+   </div>
+   <div class="navgroup">Core web languages</div>
+   <div class="navlist">
+    <button class="navbtn" data-page="html" onclick="showLesson('html')">HTML — Structure</button>
+    <button class="navbtn" data-page="css" onclick="showLesson('css')">CSS — Design</button>
+    <button class="navbtn" data-page="js" onclick="showLesson('js')">JavaScript — Interaction</button>
+   </div>
+   <div class="navgroup">Back-end & other tools</div>
+   <div class="navlist">
+    <button class="navbtn" data-page="python" onclick="showLesson('python')">Python</button>
+    <button class="navbtn" data-page="php" onclick="showLesson('php')">PHP</button>
+    <button class="navbtn" data-page="sql" onclick="showLesson('sql')">SQL & databases</button>
+    <button class="navbtn" data-page="node" onclick="showLesson('node')">Node.js</button>
+    <button class="navbtn" data-page="git" onclick="showLesson('git')">Git & GitHub</button>
+   </div>
+  </nav>
+
+  <main class="card" id="content" aria-live="polite"></main>
+ </div>
+</div>
+<footer>WebDev Academy · Learn carefully, practise often, and build responsibly.</footer>
+<footer>coplight wesley publisher company</footer>
+<script>
+const lessons={
+html:{title:"HTML — Build the structure",level:"Beginner · Front-end",intro:"HTML (HyperText Markup Language) describes the content and structure of a web page. It uses elements, often called tags, to mark headings, paragraphs, links, images, forms and more.",sections:[
+["A basic HTML document",`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My first page</title>
+</head>
+<body>
+  <h1>Hello, website!</h1>
+  <p>I am learning HTML.</p>
+</body>
+</html>`,"The doctype identifies modern HTML. The head contains page information; the body contains content visitors see."],
+["Common HTML elements",`<h1>Main heading</h1>
+<h2>Smaller heading</h2>
+<p>A paragraph of text.</p>
+<a href="https://example.com">Visit a website</a>
+<img src="photo.jpg" alt="A description of the photo">
+<button>Click me</button>`,"Use headings in a logical order. Images need useful alt text. Links navigate; buttons perform actions."],
+["Lists and forms",`<ul>
+  <li>HTML</li>
+  <li>CSS</li>
+</ul>
+<form>
+  <label for="email">Email</label>
+  <input id="email" type="email">
+  <button type="submit">Join</button>
+</form>`,"Lists organize items. Forms collect information. Labels help people understand form fields."]
+],quiz:{q:"Which HTML element creates a paragraph?",opts:["<p>","<css>","<paragraph>"],answer:0,why:"The p element represents a paragraph."}},
+css:{title:"CSS — Style the website",level:"Beginner · Front-end",intro:"CSS (Cascading Style Sheets) controls how HTML content looks: colors, fonts, spacing, layout, responsiveness and animation.",sections:[
+["Connect CSS to HTML",`<link rel="stylesheet" href="style.css">`,"Place this link inside the HTML head. It connects an external CSS file."],
+["Selectors and properties",`body {
+  font-family: Arial, sans-serif;
+  background: #f2f6ff;
+  color: #17213a;
+}
+h1 {
+  color: royalblue;
+  text-align: center;
+}`,"A selector chooses which elements to style. Properties such as color and font-family set their appearance."],
+["Spacing and layout",`.card {
+  padding: 20px;
+  margin: 16px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+}
+.container {
+  display: flex;
+  gap: 16px;
+}`,"Padding is space inside an element; margin is space outside. Flexbox helps arrange items in a row or column."]
+],quiz:{q:"Which CSS property changes text colour?",opts:["font-size","color","background-image"],answer:1,why:"The color property sets the foreground/text colour."}},
+js:{title:"JavaScript — Make pages interactive",level:"Beginner · Programming",intro:"JavaScript adds behaviour to web pages. It can respond to clicks, check forms, update content, fetch data and communicate with a server.",sections:[
+["Variables",`const learner = "Wesley";
+let lessonsCompleted = 0;
+lessonsCompleted = lessonsCompleted + 1;
+console.log(learner, lessonsCompleted);`,"Use const for values you will not reassign and let for values that may change."],
+["Functions and events",`function sayHello() {
+  alert("Hello, learner!");
+}
+document.querySelector("button")
+  .addEventListener("click", sayHello);`,"A function groups instructions. An event listener runs a function when an event, such as a click, happens."],
+["Change page content",`document.querySelector("#message").textContent =
+  "You changed this message!";`,"The DOM is the browser's object representation of the page. JavaScript can select and update its elements."]
+],quiz:{q:"Which keyword declares a variable that can be reassigned?",opts:["let","<style>","SELECT"],answer:0,why:"let declares a block-scoped variable that can be reassigned."}},
+python:{title:"Python — A useful back-end language",level:"Beginner · Back-end and beyond",intro:"Python is a general-purpose programming language. It is used for web back ends, automation, data work and more. Frameworks such as Django and Flask can power websites.",sections:[
+["Print a message",`message = "Hello from Python!"
+print(message)`,"Python uses indentation to group code. This example prints a message."],
+["A simple function",`def welcome(name):
+    return "Welcome, " + name
+
+print(welcome("Wesley"))`,"Functions make reusable blocks of code. Python is commonly used on servers, not directly as a replacement for browser HTML, CSS and JavaScript."],
+["Python in web development",`# Conceptual example
+# A web framework receives a request,
+# runs Python code, and returns a response.`,"Learn Python fundamentals first, then explore a web framework and how servers handle requests."]
+],quiz:{q:"Which function displays output in Python?",opts:["echoHTML()","print()","console.page()"],answer:1,why:"print() writes output to the console or standard output."}},
+php:{title:"PHP — Server-side web programming",level:"Beginner · Back-end",intro:"PHP is a server-side language often used to build dynamic websites. PHP code runs on a web server and can work with forms, sessions and databases.",sections:[
+["A PHP example",`<?php
+$name = "Wesley";
+echo "Hello, " . $name;
+?>`,"PHP code is commonly placed in files ending in .php. The server processes it before sending a page to the browser."],
+["Handle form data safely",`<?php
+// Example concept only:
+$name = $_POST["name"] ?? "";
+$name = trim($name);
+// Validate input before using it.
+?>`,"Never trust user input. Validate it, escape output appropriately and use prepared database statements."],
+["Where PHP fits",`Browser → Web server → PHP application
+                   ↓
+                 Database
+                   ↓
+             HTML response`,"PHP can process requests, apply application rules and communicate with a database."]
+],quiz:{q:"Where does PHP normally run?",opts:["In the user's CSS file","On the web server","Inside an image"],answer:1,why:"PHP is executed by a server configured to process PHP."}},
+sql:{title:"SQL — Work with databases",level:"Beginner · Data",intro:"SQL (Structured Query Language) is used to create, read, update and delete data in relational databases. Websites use databases to store things such as accounts, posts and products.",sections:[
+["Read data",`SELECT name, email
+FROM users;`,"SELECT chooses columns and FROM identifies the table."],
+["Filter results",`SELECT name
+FROM users
+WHERE active = TRUE;`,"WHERE filters rows. The exact true/false syntax can differ between database systems."],
+["Add data safely",`INSERT INTO users (name, email)
+VALUES ('Amina', 'amina@example.com');`,"This is a basic SQL insert. In real applications, pass values using parameterized queries rather than building SQL from user input."]
+],quiz:{q:"Which SQL command reads records from a table?",opts:["SELECT","PAINT","STYLE"],answer:0,why:"SELECT retrieves data from one or more database tables."}},
+node:{title:"Node.js — JavaScript on the server",level:"Next step · Back-end",intro:"Node.js lets developers run JavaScript outside the browser, including on servers. It is often used to build APIs and real-time applications.",sections:[
+["A first Node.js line",`console.log("Hello from Node.js");`,"Node.js uses JavaScript and provides tools for working with files, networks and servers."],
+["A tiny HTTP server",`const http = require("http");
+
+const server = http.createServer((request, response) => {
+  response.end("Hello from my server!");
+});
+
+server.listen(3000);`,"This example creates a basic server. Run it in a Node.js environment, then visit the local server address on port 3000."],
+["When to learn Node.js",`HTML + CSS + browser JavaScript
+              ↓
+         Node.js server
+              ↓
+           Database`,"Learn JavaScript fundamentals before moving to Node.js. A server also needs security, validation and error handling."]
+],quiz:{q:"What does Node.js allow you to do?",opts:["Run JavaScript outside the browser","Replace HTML tags","Design a logo"],answer:0,why:"Node.js is a JavaScript runtime that can run code on a computer or server."}},
+git:{title:"Git & GitHub — Track and share code",level:"Developer tools",intro:"Git tracks changes in your project so you can review earlier versions and collaborate. GitHub hosts Git repositories online and supports collaboration.",sections:[
+["Common Git commands",`git init
+git add .
+git commit -m "First website version"`,"These commands create a repository, stage changes and save a commit."],
+["A useful workflow",`git status
+git add index.html
+git commit -m "Add homepage"`,"Check the status, stage the files you want, then commit with a clear message."],
+["GitHub",`Your computer → Git repository
+                   ↓ push
+             GitHub repository`,"Git is the version-control tool. GitHub is one platform for hosting repositories and collaborating."]
+],quiz:{q:"What is Git mainly used for?",opts:["Tracking code changes","Styling headings","Storing browser cookies"],answer:0,why:"Git is a version-control system."}}
+};
+let completed=new Set(JSON.parse(localStorage.getItem("webdevDone")||"[]"));
+function updateProgress(){let n=completed.size,total=Object.keys(lessons).length;document.getElementById("progressBar").style.width=(n/total*100)+"%";document.getElementById("progressText").textContent=n+" of "+total+" course lessons completed";}
+function activeNav(page){document.querySelectorAll(".navbtn").forEach(b=>b.classList.toggle("active",b.dataset.page===page));}
+function showPage(page){activeNav(page);let c=document.getElementById("content");
+if(page==="home"){c.innerHTML=`<span class="pill">WELCOME</span><h2>Choose what you want to learn</h2><p>Web development combines several technologies. Start with HTML, CSS and JavaScript, then learn how servers, databases and developer tools support a complete website.</p><div class="grid">${Object.entries(lessons).map(([id,l])=>`<div class="course" onclick="showLesson('${id}')"><span class="tag">${l.level}</span><strong>${l.title}</strong><small>${l.intro.slice(0,105)}…</small></div>`).join("")}</div><h3>What do you need to build a website?</h3><div class="notice">For a simple website, begin with HTML, CSS and JavaScript. For accounts, private messages or saved information, you will also need a back-end, a database, security and hosting.</div>`}
+if(page==="roadmap"){c.innerHTML=`<h2>Complete learning roadmap</h2><p>Follow these stages in order. You do not need to learn every programming language to build a website; choose tools that suit the project.</p><h3>1. Front-end foundations</h3><ul><li>HTML: structure, semantic elements, forms, accessibility</li><li>CSS: selectors, box model, Flexbox, Grid, responsive layouts</li><li>JavaScript: variables, conditions, loops, functions, DOM, events, APIs</li></ul><h3>2. Back-end options</h3><ul><li>JavaScript with Node.js</li><li>Python with Django or Flask</li><li>PHP with a suitable framework</li><li>Other options include Java, C# and Ruby</li></ul><h3>3. Data and web services</h3><ul><li>SQL and relational databases</li><li>Database design and safe queries</li><li>HTTP, JSON and APIs</li><li>Authentication, authorization and privacy</li></ul><h3>4. Build and publish</h3><ul><li>Git and GitHub</li><li>Testing, debugging and accessibility</li><li>Security and performance</li><li>Hosting, domain names and maintenance</li></ul><div class="notice">Recommended beginner path: HTML → CSS → JavaScript → Git → one back-end language → SQL → deployment.</div>`}
+if(page==="practice"){c.innerHTML=`<h2>HTML, CSS & JavaScript playground</h2><p>Change the example and select Run preview. This mini playground runs HTML, CSS and JavaScript in your browser.</p><textarea id="playCode" class="editor" spellcheck="false"><h1>Hello, learner!</h1>
+<p>Change this text and run the preview.</p>
+<button onclick="document.querySelector('p').textContent='You made this work!'">Try me</button>
+<style>
+body { font-family: Arial; padding: 20px; }
+h1 { color: royalblue; }
+button { padding: 10px; border: 0; border-radius: 8px; background: royalblue; color: white; }
+</style></textarea><div class="actions"><button class="primary" onclick="runPreview()">Run preview</button><button class="secondary" onclick="resetPlay()">Reset example</button></div><iframe id="preview" title="Your code preview" sandbox="allow-scripts"></iframe><p class="muted">Safety note: the preview is sandboxed. Do not paste code from strangers or add code you do not understand.</p>`}
+if(page==="glossary"){c.innerHTML=`<h2>Web development glossary</h2><div class="grid">${[
+["Element","A piece of HTML, such as a paragraph or heading."],["Tag","Markup in angle brackets, such as &lt;p&gt;."],["Attribute","Extra information in an HTML element, such as href or alt."],["Selector","A CSS pattern that chooses elements to style."],["Property","A CSS setting, such as color or margin."],["Variable","A named place to hold a value in a program."],["Function","Reusable instructions that perform a task."],["DOM","The browser's structured representation of a web page."],["API","A defined way for software systems to communicate."],["Database","An organized place to store and manage information."],["Server","A computer or program that responds to requests."],["Responsive design","A layout that adapts to different screen sizes."]
+].map(x=>`<div class="course"><strong>${x[0]}</strong><small>${x[1]}</small></div>`).join("")}</div>`}
+}
+function showLesson(id){let l=lessons[id],c=document.getElementById("content");activeNav(id);c.innerHTML=`<span class="pill">${l.level}</span><h2>${l.title}</h2><p>${l.intro}</p>${l.sections.map((s,i)=>`<h3>${i+1}. ${s[0]}</h3><pre>${escapeHTML(s[1])}</pre><p>${s[2]}</p>`).join("")}<h3>Quick knowledge check</h3><p><strong>${l.quiz.q}</strong></p><div id="quizOptions">${l.quiz.opts.map((o,i)=>`<label class="quizopt"><input type="radio" name="answer" value="${i}"> ${escapeHTML(o)}</label>`).join("")}</div><div class="actions"><button class="primary" onclick="checkQuiz('${id}')">Check answer</button><button class="secondary" onclick="markComplete('${id}')">Mark lesson complete</button></div><p id="quizResult" aria-live="polite"></p><div class="notice">Practice tip: type the example yourself and change one thing. Learning by experimenting helps you remember.</div>`}
+function escapeHTML(s){return s.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")}
+function checkQuiz(id){let chosen=document.querySelector('input[name="answer"]:checked'),r=document.getElementById("quizResult");if(!chosen){r.textContent="Choose an answer first.";return}let q=lessons[id].quiz;r.innerHTML=(Number(chosen.value)===q.answer?"<b style='color:#55d6a0'>Correct!</b> ":"<b style='color:#ff9b9b'>Not quite.</b> ")+q.why}
+function markComplete(id){completed.add(id);localStorage.setItem("webdevDone",JSON.stringify([...completed]));updateProgress();document.getElementById("quizResult").textContent="Lesson marked complete. Well done — keep practising!"}
+const initialCode=document.getElementById("playCode")?.value;
+function runPreview(){let code=document.getElementById("playCode").value;document.getElementById("preview").srcdoc=code}
+function resetPlay(){document.getElementById("playCode").value=initialCode;runPreview()}
+showPage("home");updateProgress();
+</script>
+</body>
+</html>
